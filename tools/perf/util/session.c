@@ -189,6 +189,11 @@ static int ordered_events__deliver_event(struct ordered_events *oe,
 					   event->file_path);
 }
 
+struct perf_tool *perf_session__tool(struct perf_session *session)
+{
+	return session->tool;
+}
+
 struct perf_session *__perf_session__new(struct perf_data *data,
 					 bool repipe, int repipe_fd,
 					 struct perf_tool *tool)
