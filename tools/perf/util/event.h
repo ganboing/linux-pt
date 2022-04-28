@@ -9,7 +9,9 @@
  */
 #include <stdio.h>
 #include <linux/stddef.h>
+#ifndef __LIBPERF_EVENT_H
 #include <perf/event.h>
+#endif
 #include <linux/types.h>
 
 #include "perf_regs.h"
