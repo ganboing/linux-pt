@@ -2,6 +2,7 @@
 #ifndef __PERF_SESSION_H
 #define __PERF_SESSION_H
 
+#include "session2.h"
 #include "trace-event.h"
 #include "event.h"
 #include "header.h"
@@ -61,20 +62,6 @@ struct decomp {
 
 struct perf_tool;
 
-struct perf_session *__perf_session__new(struct perf_data *data,
-					 bool repipe, int repipe_fd,
-					 struct perf_tool *tool);
-
-static inline struct perf_session *perf_session__new(struct perf_data *data,
-						     struct perf_tool *tool)
-{
-	return __perf_session__new(data, false, -1, tool);
-}
-
-struct perf_tool *perf_session__tool(struct perf_session *session);
-
-void perf_session__delete(struct perf_session *session);
-
 void perf_event_header__bswap(struct perf_event_header *hdr);
 
 int perf_session__peek_event(struct perf_session *session, off_t file_offset,
@@ -86,8 +73,6 @@ typedef int (*peek_events_cb_t)(struct perf_session *session,
 				void *data);
 int perf_session__peek_events(struct perf_session *session, u64 offset,
 			      u64 size, peek_events_cb_t cb, void *data);
-
-int perf_session__process_events(struct perf_session *session);
 
 int perf_session__queue_event(struct perf_session *s, union perf_event *event,
 			      u64 timestamp, u64 file_offset, const char *file_path);

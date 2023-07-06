@@ -95,7 +95,7 @@ static inline size_t sample_read_value_size(u64 read_format)
 static inline struct sample_read_value *
 next_sample_read_value(struct sample_read_value *v, u64 read_format)
 {
-	return (void *)v + sample_read_value_size(read_format);
+	return (struct sample_read_value*)((char*)v + sample_read_value_size(read_format));
 }
 
 #define sample_read_group__for_each(v, nr, rf)		\
@@ -352,12 +352,12 @@ struct perf_synth_intel_iflag_chg {
  */
 static inline void *perf_sample__synth_ptr(struct perf_sample *sample)
 {
-	return sample->raw_data - 4;
+	return (char*)sample->raw_data - 4;
 }
 
 static inline void *perf_synth__raw_data(void *p)
 {
-	return p + 4;
+	return (char*)p + 4;
 }
 
 #define perf_synth__raw_size(d) (sizeof(d) - 4)
