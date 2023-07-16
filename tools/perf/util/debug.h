@@ -7,6 +7,7 @@
 #include <stdbool.h>
 #include <stdio.h>
 #include <linux/compiler.h>
+#include "debug2.h"
 
 extern int verbose;
 extern int debug_peo_args;
@@ -79,7 +80,6 @@ int veprintf(int level, int var, const char *fmt, va_list args);
 int perf_debug_option(const char *str);
 void debug_set_file(FILE *file);
 void debug_set_display_time(bool set);
-void perf_debug_setup(void);
 int perf_quiet_option(void);
 
 void dump_stack(void);

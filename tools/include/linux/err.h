@@ -2,7 +2,7 @@
 #ifndef __TOOLS_LINUX_ERR_H
 #define __TOOLS_LINUX_ERR_H
 
-#include <linux/compiler.h>
+//#include <linux/compiler.h>
 #include <linux/types.h>
 
 #include <asm/errno.h>
@@ -30,7 +30,7 @@
  */
 #define MAX_ERRNO	4095
 
-#define IS_ERR_VALUE(x) unlikely((x) >= (unsigned long)-MAX_ERRNO)
+#define IS_ERR_VALUE(x) ((x) >= (unsigned long)-MAX_ERRNO)
 
 static inline void * __must_check ERR_PTR(long error_)
 {
@@ -49,7 +49,7 @@ static inline bool __must_check IS_ERR(__force const void *ptr)
 
 static inline bool __must_check IS_ERR_OR_NULL(__force const void *ptr)
 {
-	return unlikely(!ptr) || IS_ERR_VALUE((unsigned long)ptr);
+	return (!ptr) || IS_ERR_VALUE((unsigned long)ptr);
 }
 
 static inline int __must_check PTR_ERR_OR_ZERO(__force const void *ptr)
