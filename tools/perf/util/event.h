@@ -14,7 +14,7 @@
 #endif
 #include <linux/types.h>
 
-//#include "perf_regs.h"
+#include "perf_regs.h"
 
 struct dso;
 struct machine;
